@@ -95,8 +95,20 @@ export function useMeetingRecorder() {
 
             // 3. Record the mixed audio output
             const mixedStream = destination.stream;
-            const mediaRecorder = new MediaRecorder(mixedStream, { mimeType: "audio/webm" });
+
+            // Try to find the best supported MIME type
+            const mimeType = [
+                "audio/webm;codecs=opus",
+                "audio/webm",
+                "audio/ogg;codecs=opus"
+            ].find(type => MediaRecorder.isTypeSupported(type)) || "audio/webm";
+
+            const mediaRecorder = new MediaRecorder(mixedStream, {
+                mimeType,
+                audioBitsPerSecond: 32000 // 32 kbps is perfect for speech and stays under Vercel 4.5MB limit for ~18-20 mins
+            });
             mediaRecorderRef.current = mediaRecorder;
+
 
             const chunks: BlobPart[] = [];
             mediaRecorder.ondataavailable = (event) => {
