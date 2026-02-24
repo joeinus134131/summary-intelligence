@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useHasMounted } from "@/hooks/useHasMounted";
+
 import MeetingRecorder from "@/components/MeetingRecorder";
 import { MeetingHistory } from "@/components/MeetingHistory";
 import { useLanguage } from "@/lib/i18n";
@@ -34,10 +36,11 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  const mounted = useHasMounted();
+
   return (
     <div className="min-h-screen bg-[#030712] text-zinc-50 font-sans selection:bg-indigo-500/30 flex flex-col">
-
-      {/* Dynamic Background */}
+      {/* ... existing dynamic background code ... */}
       <div className="fixed inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-indigo-600/10 blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-purple-600/10 blur-[120px]" />
@@ -48,18 +51,19 @@ export default function Home() {
         <div className="flex bg-white/5 border border-white/10 rounded-full p-1 shadow-lg backdrop-blur-md">
           <button
             onClick={() => setLanguage("en")}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${language === 'en' ? 'bg-indigo-600 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${(!mounted || language === 'en') ? 'bg-indigo-600 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
           >
             EN
           </button>
           <button
             onClick={() => setLanguage("id")}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${language === 'id' ? 'bg-indigo-600 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${(mounted && language === 'id') ? 'bg-indigo-600 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
           >
             ID
           </button>
         </div>
       </header>
+
 
       <main className="relative z-10 flex flex-1 flex-col items-center p-4 md:p-10 w-full">
         {/* Header Hero */}

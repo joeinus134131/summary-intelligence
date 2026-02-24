@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Summary Intelligence 🧠
 
-## Getting Started
+**Capture everything, type nothing.** Summary Intelligence is a privacy-first, local-transcription, and AI-powered summarization tool designed to streamline your meetings, YouTube sessions, and Discord conversations.
 
-First, run the development server:
+![Summary Intelligence Hero](public/images/readme/hero.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🎙️ Instant Recording & Source Detection
+Capture audio from your microphone or directly from browser tabs (YouTube, Discord, Google Meet, Zoom) without needing any bot permissions.
+- **Smart Detection**: Automatically identifies the source of your recording.
+- **Micro-animations**: A smooth, glassmorphic UI that feels alive.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📝 AI-Powered Executive Summaries
+Get high-quality transcriptions and summaries in seconds.
+- **Groq Integration**: Leverages Whisper for lightning-fast transcription and Llama-3 for intelligent summarization.
+- **Action Items**: Automatically extracts tasks and follow-ups from your conversations.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![Meeting Summary View](public/images/readme/summary.png)
 
-## Learn More
+### 🌍 Multi-Language Support
+Full support for English and Indonesian, including localized summaries and UI.
+- **Seamless Toggle**: Switch between languages instantly.
+- **Localized AI**: AI processes and summarizes in your preferred language.
 
-To learn more about Next.js, take a look at the following resources:
+![Indonesian Support](public/images/readme/hero_id.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🔒 Privacy First (Local-Only Storage)
+Your data never stays on a central server.
+- **IndexedDB Storage**: All meeting history is saved locally in your browser via Dexie.
+- **Serverless Processing**: Audio is sent to AI endpoints only for immediate processing and never stored externally.
+- **Full Control**: You own your data. Clear your site data to delete everything.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Frontend**: [Next.js 16](https://nextjs.org/) (App Router), [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Database (Local)**: [Dexie.js](https://dexie.org/) (IndexedDB)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **AI Backend**: [Groq Cloud](https://groq.com/) (Whisper & Llama-3)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🚦 Getting Started
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/joeinus134131/summary-intelligence.git
+   cd summary-intelligence
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**:
+   Create a `.env.local` file with your Groq API key:
+   ```env
+   GROQ_API_KEY=your_api_key_here
+   ```
+
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Open the app**:
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 📜 Legal
+
+- [Terms & Conditions](public/images/readme/terms.png)
+- [Privacy Policy](public/images/readme/terms.png)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+Made with ❤️ by [Your Name/Organization]

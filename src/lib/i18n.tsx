@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useHasMounted } from "@/hooks/useHasMounted";
 
 
@@ -280,16 +280,23 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-    const [language, setLanguage] = useState<Language>(() => {
-        if (typeof window !== "undefined") {
-            const savedLang = localStorage.getItem("app_lang") as Language;
-            if (savedLang === "en" || savedLang === "id") return savedLang;
-        }
-        return "en";
-    });
+    const [language, setLanguage] = useState<Language>("en");
     const mounted = useHasMounted();
 
+    useEffect(() => {
+        const savedLang = localStorage.getItem("app_lang") as Language;
+        if (savedLang === "en" || savedLang === "id") {
+            // Using requestAnimationFrame to avoid the "cascading renders" warning 
+            // while still allowing the initial state sync after mount.
+            requestAnimationFrame(() => {
+                setLanguage(savedLang);
+            });
+        }
+    }, []);
+
+
     const handleSetLanguage = (lang: Language) => {
+
         setLanguage(lang);
         if (typeof window !== "undefined") {
             localStorage.setItem("app_lang", lang);
